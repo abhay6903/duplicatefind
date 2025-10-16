@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zigma Dedupe</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <script defer src="/static/app.js"></script>
+</head>
+<body>
+  <!-- Decorative Elements -->
+  <div class="grid-background"></div>
+  <div class="gradient-orb orb-1"></div>
+  <div class="gradient-orb orb-2"></div>
+  <div class="gradient-orb orb-3"></div>
+
+  <header>
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M16 4L28 10V22L16 28L4 22V10L16 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M16 4V16M16 16L4 10M16 16L28 10M16 16V28M16 28L4 22M16 28L28 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="logo-text">Zigma<span class="logo-accent">Converge</span></span>
+      </div>
+      <button id="themeToggle" aria-label="Toggle theme" class="theme-btn">
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero-section">
+      <h1 class="main-title">
+        <span class="title-line">Σ Zigma Data</span>
+        <span class="title-line gradient-text">Deduplication</span>
+      </h1>
+    </div>
+
+    <section class="connect-section">
+      <div class="card glass-card animate-in">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h2 class="card-title">Database Connection</h2>
+        </div>
+        <form id="connectForm">
+          <div class="form-grid">
+            <div class="input-group">
+              <label class="input-label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                  <line x1="6" y1="6" x2="6.01" y2="6"/>
+                  <line x1="6" y1="18" x2="6.01" y2="18"/>
+                </svg>
+                Host
+              </label>
+              <input type="text" name="host" value="{{ defaults.TRINO_HOST }}" required placeholder="database.example.com" class="styled-input" />
+            </div>
+            <div class="input-group">
+              <label class="input-label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                Port
+              </label>
+              <input type="number" name="port" value="{{ defaults.TRINO_PORT }}" required placeholder="8080" class="styled-input" />
+            </div>
+            <div class="input-group">
+              <label class="input-label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+                User
+              </label>
+              <input type="text" name="user" value="{{ defaults.TRINO_USER }}" required placeholder="username" class="styled-input" />
+            </div>
+            <div class="input-group">
+              <label class="input-label">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                </svg>
+                Catalog
+              </label>
+              <input type="text" name="catalog" value="{{ defaults.TRINO_CATALOG }}" required placeholder="catalog_name" class="styled-input" />
+            </div>
+          </div>
+          
+          <input type="hidden" name="http_scheme" value="http" />
+          
+          <button type="submit" class="btn btn-primary btn-large">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            Connect to Database
+          </button>
+          <div id="connectStatus" class="status-message"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="workflow-section">
+      <div class="workflow-grid">
+        <!-- Left Column -->
+        <div class="workflow-left">
+          <div class="card glass-card animate-in" id="schemaBox">
+            <div class="select-wrapper">
+              <label class="select-label">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/>
+                </svg>
+                Schema
+              </label>
+              <input type="text" id="schemaInput" placeholder="Type or select schema" class="styled-input" />
+              <select id="schemaSelect" class="styled-select">
+                <option value="">— Connect first —</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="card glass-card animate-in" id="tableBox">
+            <div class="select-wrapper">
+              <label class="select-label">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/>
+                </svg>
+                Table
+              </label>
+              <input type="text" id="tableInput" placeholder="Type or select table" class="styled-input" />
+              <select id="tableSelect" class="styled-select">
+                <option value="">— Select schema —</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="runBtn" disabled class="btn btn-primary btn-large btn-action">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="10 8 16 12 10 16 10 8"/>
+            </svg>
+            Run Deduplication
+          </button>
+          
+          <div class="action-row">
+            <button id="resetBtn" class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"/>
+                <polyline points="1 20 1 14 7 14"/>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+              </svg>
+              Reset
+            </button>
+          </div>
+          
+          <div class="progress-card hidden" id="progressContainer">
+            <div id="spinner" class="spinner-modern hidden">
+              <div class="spinner-ring"></div>
+              <div class="spinner-ring"></div>
+              <div class="spinner-ring"></div>
+            </div>
+            <div class="progress-bar-container">
+              <div id="barFill" class="progress-bar-fill" style="width:0%"></div>
+            </div>
+            <div id="pct" class="progress-percentage">0%</div>
+            <div id="runStatus" class="status-message"></div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="workflow-right">
+          <div class="card glass-card animate-in">
+            <div class="card-header">
+              <div class="card-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="m21 21-4.35-4.35"/>
+                </svg>
+              </div>
+              <h3 class="card-title">Duplicate Checker</h3>
+            </div>
+            <div id="recordForm" class="record-form">
+              <div class="empty-state">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/>
+                </svg>
+                <p>No table selected</p>
+                <span>Connect and select a table</span>
+              </div>
+            </div>
+            <div class="action-row action-row-center">
+              <button id="checkDuplicateBtn" class="btn btn-success" disabled>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="m21 21-4.35-4.35"/>
+                </svg>
+                Check Duplicate
+              </button>
+              <button id="downloadLink" class="btn btn-secondary disabled">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download Results
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>Powered by Zigma Intelligence</p>
+    </div>
+  </footer>
+</body>
+</html>
